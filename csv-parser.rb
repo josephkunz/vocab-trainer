@@ -29,22 +29,21 @@ end
 display_vocab(filepath)
 
 # 2. I want to ADD vocabulary to the list
-# csv_options = { col_sep: ',', force_quotes: true, quote_char: '""' }
+csv_options = { col_sep: ';'}
 
-def add_words(filepath)
+def add_words(filepath, csv_options)
   # receives user input and stores it in two respective variables.
   # side-note: opted for unquoted-writing because excel does the same thing.
   # =>  Using quote_data function to quote retroactively.
   puts "What word would you like to add? Please provide the french, followed by the english translation "
   french_word = gets.chomp
-  p french_word
   english_word = gets.chomp
 
-  CSV.open(filepath, 'wb') do |csv|
+  CSV.open(filepath, 'wb', csv_options) do |csv|
     csv << [french_word, english_word]
   end
 end
-add_words(filepath)
+add_words(filepath, csv_options)
 
 # csv-data displayed in the format: "english: '#{english-word}"
 # then I need a gets.chomp for user answer
