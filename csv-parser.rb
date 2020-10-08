@@ -23,19 +23,12 @@ end
 def display_vocab(filepath)
   all_words = quote_data(filepath)
   all_words.each do |word|
-    puts "#{word[0]} | #{word[1]}"
+    puts "The french word: #{word[0]} corresponds to the english: #{word[1]}."
   end
 end
 
 display_vocab(filepath)
-# def display_vocab
-#   formatted_rows = quote_data(filepath)
 
-#   puts formatted_rows
-# end
-# quote_data.foreach(filepath, csv_options) do |row|
-#   puts "#{row['french']} corresponds to: #{row['english']}"
-# end
 
 # csv-data displayed in the format: "english: '#{english-word}"
 # then I need a gets.chomp for user answer
