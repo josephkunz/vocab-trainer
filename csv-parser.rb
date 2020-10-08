@@ -37,6 +37,7 @@ def add_words(filepath)
   # =>  Using quote_data function to quote retroactively.
   puts "What word would you like to add? Please provide the french, followed by the english translation "
   french_word = gets.chomp
+  p french_word
   english_word = gets.chomp
 
   CSV.open(filepath, 'wb') do |csv|
