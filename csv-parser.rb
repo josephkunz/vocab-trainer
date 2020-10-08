@@ -3,16 +3,15 @@ require 'csv'
 # 2. I as a USER want to be tested,
 # meaning asked for the translation of a displayed word.
 
-# 2) to achieve 2, I need:
-# csv-data as an array of strings --> done
+# 1. I want to DISPLAY all vocabulary.
 
-csv_options = { col_sep: ',', quote_char: '"', headers: :first_row }
 filepath = 'french_verbs.csv'
 
 def quote_data(filepath)
+  # empty array to store all quoted data
   data_quoted = []
+  # Should "quote" all data and push to an empty array
   CSV.foreach(filepath) do |row|
-    # I must transform each entry into a string to be able to work with it
     row.map do |col|
       data_quoted << col.split(';')
     end
@@ -22,13 +21,29 @@ end
 
 def display_vocab(filepath)
   all_words = quote_data(filepath)
-  all_words.each do |word|
-    puts "The french word: #{word[0]} corresponds to the english: #{word[1]}."
+  all_words.each_with_index do |word, index|
+    puts "#{index + 1}. FR: #{word[0]} | ENG: #{word[1]}."
   end
 end
 
 display_vocab(filepath)
 
+# 2. I want to ADD vocabulary to the list
+# csv_options = { col_sep: ',', force_quotes: true, quote_char: '""' }
+
+def add_words(filepath)
+  # receives user input and stores it in two respective variables.
+  # side-note: opted for unquoted-writing because excel does the same thing.
+  # =>  Using quote_data function to quote retroactively.
+  puts "What word would you like to add? Please provide the french, followed by the english translation "
+  french_word = gets.chomp
+  english_word = gets.chomp
+
+  CSV.open(filepath, 'wb') do |csv|
+    csv << [french_word, english_word]
+  end
+end
+add_words(filepath)
 
 # csv-data displayed in the format: "english: '#{english-word}"
 # then I need a gets.chomp for user answer
