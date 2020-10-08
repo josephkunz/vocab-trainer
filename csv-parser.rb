@@ -39,7 +39,7 @@ def add_words(filepath, csv_options)
   french_word = gets.chomp
   english_word = gets.chomp
 
-  CSV.open(filepath, 'wb', csv_options) do |csv|
+  CSV.open(filepath, 'a+', csv_options) do |csv|
     csv << [french_word, english_word]
   end
 end
