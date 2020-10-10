@@ -19,17 +19,27 @@ def quote_data(filepath)
   data_quoted
 end
 
-def display_vocab(filepath)
+def display_vocabulary(filepath)
   all_words = quote_data(filepath)
   all_words.each_with_index do |word, index|
     puts "#{index + 1}. FR: #{word[0]} | ENG: #{word[1]}."
   end
 end
 
+# display_vocabulary(filepath)
+
+def display_vocab(filepath)
+  rows = quote_data(filepath)
+  one_word = rows.map do |row|
+    row
+  end
+  puts one_word.sample
+end
+
 display_vocab(filepath)
 
 # 2. I want to ADD vocabulary to the list
-csv_options = { col_sep: ';'}
+csv_options = { col_sep: ';' }
 
 def add_words(filepath, csv_options)
   # receives user input and stores it in two respective variables.
@@ -43,7 +53,12 @@ def add_words(filepath, csv_options)
     csv << [french_word, english_word]
   end
 end
-add_words(filepath, csv_options)
+# add_words(filepath, csv_options)
+
+# 3. I want to STUDY vocabulary, thus being asssessed on random vocabulary
+# 3.1 I need to be shown a random french word
+
+# 3.2 I need to be able to insert the correct translation
 
 # csv-data displayed in the format: "english: '#{english-word}"
 # then I need a gets.chomp for user answer
